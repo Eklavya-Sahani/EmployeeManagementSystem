@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>EmployeeHub Dashboard</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="sidebar">
+
+        <!-- LOGO -->
+
+        <div class="brand">
+
+            <div class="brand-mark">
+                E
+            </div>
+
+            <div class="brand-text">
+                <b>EmployeeHub</b>
+                <small>Management System</small>
+            </div>
+
+        </div>
+
+
+        <!-- NAVIGATION -->
+
+        <nav>
+
+            <div class="nav-label">
+                MAIN MENU
+            </div>
+
+
+            <a
+                href="#"
+                class="nav active"
+                onclick="showSection('dashboard'); return false;"
+            >
+                <span>⌂</span>
+                Dashboard
+            </a>
+
+
+            <a
+                href="#"
+                class="nav"
+                onclick="showSection('employees'); return false;"
+            >
+                <span>♙</span>
+                Employees
+            </a>
+
+
+            <a
+                href="#"
+                class="nav"
+                onclick="showSection('departments'); return false;"
+            >
+                <span>▦</span>
+                Departments
+            </a>
+
+
+            <a href="#" class="nav">
+
+                <span>▤</span>
+
+                Reports
+
+            </a>
+
+
+            <div class="nav-label system">
+                SYSTEM
+            </div>
+
+
+            <a href="#" class="nav">
+
+                <span>⚙</span>
+
+                Settings
+
+            </a>
+
+
+            <a href="#" class="nav">
+
+                <span>?</span>
+
+                Help & Support
+
+            </a>
+
+        </nav>
+
+
+        <!-- UPGRADE CARD -->
+
+        <div class="upgrade">
+
+            <div class="upgrade-icon">
+                ♛
+            </div>
+
+            <b>
+                Upgrade to Pro
+            </b>
+
+            <p>
+                Unlock advanced features and powerful analytics.
+            </p>
+
+            <button>
+                Learn More
+            </button>
+
+        </div>
+
+
+        <!-- ADMIN -->
+
+        <div class="admin">
+
+            <div class="avatar">
+                A
+            </div>
+
+            <div class="admin-info">
+
+                <b>
+                    Admin User
+                </b>
+
+                <small>
+                    Administrator
+                </small>
+
+            </div>
+
+            <span>
+                ⋮⌄
+            </span>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="main">
+
+
+        <!-- TOP BAR -->
+
+        <header class="topbar">
+
+            <button
+                class="mobile-menu"
+                onclick="toggleSidebar()"
+            >
+                ☰
+            </button>
+
+
+            <!-- SEARCH -->
+
+            <div class="top-search">
+
+                <span>
+                    ⌕
+                </span>
+
+                <input
+                    type="text"
+                    id="globalSearch"
+                    placeholder="Search employees, departments..."
+                    oninput="globalSearch()"
+                >
+
+            </div>
+
+
+            <!-- RIGHT SIDE -->
+
+            <div class="top-actions">
+
+                <button class="notification">
+
+                    ♧
+
+                    <i>
+                        3
+                    </i>
+
+                </button>
+
+
+                <div class="top-avatar">
+                    A
+                </div>
+
+
+                <b>
+                    Admin
+                </b>
+
+
+                <span>
+                    ⌄
+                </span>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =====================================================
+             DASHBOARD
+        ====================================================== -->
+
+        <section
+            id="dashboardSection"
+            class="section"
+        >
+
+
+            <!-- PAGE HEADING -->
+
+            <div class="heading">
+
+                <div>
+
+                    <h1>
+                        Good Morning, Admin 👋
+                    </h1>
+
+                    <p>
+                        Here's what's happening with your organization today.
+                    </p>
+
+                </div>
+
+
+                <button class="date-btn">
+
+                    ▣
+
+                    &nbsp;
+
+                    Jan 2024 - Dec 2024
+
+                    ⌄
+
+                </button>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 STAT CARDS
+            ================================================== -->
+
+            <div class="stats">
+
+
+                <!-- TOTAL EMPLOYEES -->
+
+                <div class="stat">
+
+                    <div>
+
+                        <span>
+                            Total Employees
+                        </span>
+
+                        <strong id="totalEmployees">
+                            0
+                        </strong>
+
+                        <em>
+                            ↗
+                            <b id="employeeChange">
+                                0
+                            </b>
+                            in past 1 month
+                        </em>
+
+                    </div>
+
+
+                    <div class="stat-symbol blue">
+                        ♙
+                    </div>
+
+                </div>
+
+
+
+                <!-- DEPARTMENTS -->
+
+                <div class="stat">
+
+                    <div>
+
+                        <span>
+                            Departments
+                        </span>
+
+                        <strong id="totalDepartments">
+                            0
+                        </strong>
+
+                        <em>
+                            ↗ Active departments
+                        </em>
+
+                    </div>
+
+
+                    <div class="stat-symbol purple">
+                        ▦
+                    </div>
+
+                </div>
+
+
+
+                <!-- SALARY -->
+
+                <div class="stat">
+
+                    <div>
+
+                        <span>
+                            Average Salary
+                        </span>
+
+                        <strong id="averageSalary">
+                            ₹0
+                        </strong>
+
+                        <em>
+                            ↗ Average employee salary
+                        </em>
+
+                    </div>
+
+
+                    <div class="stat-symbol green">
+                        ₹
+                    </div>
+
+                </div>
+
+
+
+                <!-- SYSTEM -->
+
+                <div class="stat">
+
+                    <div>
+
+                        <span>
+                            System Status
+                        </span>
+
+                        <strong class="healthy">
+                            Healthy
+                        </strong>
+
+                        <em>
+                            ● All services operational
+                        </em>
+
+                    </div>
+
+
+                    <div class="stat-symbol orange">
+                        ⌁
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 ANALYTICS
+            ================================================== -->
+
+            <div class="analytics">
+
+
+                <!-- EMPLOYEE DISTRIBUTION -->
+
+                <div class="card distribution">
+
+                    <div class="card-title">
+
+                        <div>
+
+                            <h3>
+                                Employee Distribution
+                            </h3>
+
+                            <p>
+                                Employees by department
+                            </p>
+
+                        </div>
+
+
+                        <select id="chartDept">
+
+                            <option value="">
+                                All Departments
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="donut-area">
+
+                        <div class="donut">
+
+                            <canvas
+                                id="departmentChart"
+                            ></canvas>
+
+                        </div>
+
+
+                        <div id="legend"></div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- SALARY OVERVIEW -->
+
+                <div class="card salary">
+
+                    <div class="card-title">
+
+                        <div>
+
+                            <h3>
+                                Salary Overview
+                            </h3>
+
+                            <p>
+                                Average salary by department
+                            </p>
+
+                        </div>
+
+
+                        <select>
+
+                            <option>
+                                Average Salary
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="chart-box">
+
+                        <canvas
+                            id="salaryChart"
+                        ></canvas>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- EMPLOYEE GROWTH -->
+
+                <div class="card growth">
+
+                    <div class="card-title">
+
+                        <div>
+
+                            <h3>
+                                Employee Growth
+                            </h3>
+
+                            <p>
+                                Employee count over time
+                            </p>
+
+                        </div>
+
+
+                        <select>
+
+                            <option>
+                                This Year
+                            </option>
+
+                            <option>
+                                All Time
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- GROWTH KPI -->
+
+                    <div class="growth-number">
+
+                        <strong id="growthPercent">
+                            +0%
+                        </strong>
+
+                        <span>
+                            ↗
+                        </span>
+
+
+                        <small id="growthText">
+                            Employee growth based on joining dates
+                        </small>
+
+
+                        <b>
+
+                            Total Employees
+
+                            <i id="growthTotal">
+                                0
+                            </i>
+
+                        </b>
+
+                    </div>
+
+
+                    <!-- GROWTH GRAPH -->
+
+                    <div class="chart-box growth-box">
+
+                        <canvas
+                            id="growthChart"
+                        ></canvas>
+
+                    </div>
+
+
+                    <!-- GROWTH MESSAGE -->
+
+                    <div class="growth-note">
+
+                        <span>
+                            ↗
+                        </span>
+
+                        <div>
+
+                            <b>
+                                Steady growth
+                            </b>
+
+                            <small>
+                                Your employee trend is updated from your database.
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 BOTTOM SECTION
+            ================================================== -->
+
+            <div class="bottom-grid">
+
+
+                <!-- RECENT ACTIVITY -->
+
+                <div class="card activity">
+
+                    <div class="card-title">
+
+                        <h3>
+                            Recent Activity
+                        </h3>
+
+                        <a href="#">
+                            View All →
+                        </a>
+
+                    </div>
+
+
+                    <div id="recentActivity"></div>
+
+                </div>
+
+
+
+                <!-- EMPLOYEE TABLE -->
+
+                <div class="card employee-card">
+
+                    <div class="card-title">
+
+                        <h3>
+                            Employees
+                        </h3>
+
+
+                        <div class="table-tools">
+
+
+                            <!-- SEARCH -->
+
+                            <div class="mini-search">
+
+                                ⌕
+
+                                <input
+                                    id="searchInput"
+                                    placeholder="Search employees..."
+                                    oninput="applyFilters()"
+                                >
+
+                            </div>
+
+
+                            <!-- DEPARTMENT -->
+
+                            <select
+                                id="departmentFilter"
+                                onchange="applyFilters()"
+                            >
+
+                                <option value="">
+                                    All Departments
+                                </option>
+
+                            </select>
+
+
+                            <!-- ADD -->
+
+                            <button
+                                class="add-btn"
+                                onclick="openAddModal()"
+                            >
+
+                                +
+
+                                Add Employee
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="table-wrap">
+
+                        <table>
+
+                            <thead>
+
+                            <tr>
+
+                                <th></th>
+
+                                <th>
+                                    Employee
+                                </th>
+
+                                <th>
+                                    Position
+                                </th>
+
+                                <th>
+                                    Department
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+
+                                <th>
+                                    Joining Date
+                                </th>
+
+                                <th>
+                                    Actions
+                                </th>
+
+                            </tr>
+
+                            </thead>
+
+
+                            <tbody
+                                id="employeeTableBody"
+                            ></tbody>
+
+                        </table>
+
+
+                        <div
+                            id="emptyState"
+                            class="empty"
+                        >
+                            No employees found.
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             EMPLOYEES PAGE
+        ====================================================== -->
+
+        <section
+            id="employeesSection"
+            class="section hidden"
+        >
+
+            <div class="heading">
+
+                <div>
+
+                    <h1>
+                        Employees
+                    </h1>
+
+                    <p>
+                        Manage all employees in your organization.
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="add-btn"
+                    onclick="openAddModal()"
+                >
+
+                    +
+
+                    Add Employee
+
+                </button>
+
+            </div>
+
+
+            <div class="card employee-card">
+
+                <div class="table-tools standalone">
+
+                    <div class="mini-search">
+
+                        ⌕
+
+                        <input
+                            id="searchInput2"
+                            placeholder="Search employees..."
+                            oninput="syncSearch(this.value)"
+                        >
+
+                    </div>
+
+
+                    <select
+                        id="departmentFilter2"
+                        onchange="syncDept(this.value)"
+                    >
+
+                        <option value="">
+                            All Departments
+                        </option>
+
+                    </select>
+
+
+                    <button onclick="loadEmployees()">
+                        ↻ Refresh
+                    </button>
+
+                </div>
+
+
+                <div class="table-wrap">
+
+                    <table>
+
+                        <thead>
+
+                        <tr>
+
+                            <th>
+                                Employee
+                            </th>
+
+                            <th>
+                                Position
+                            </th>
+
+                            <th>
+                                Department
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Joining Date
+                            </th>
+
+                            <th>
+                                Actions
+                            </th>
+
+                        </tr>
+
+                        </thead>
+
+
+                        <tbody
+                            id="employeeTableBody2"
+                        ></tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             DEPARTMENTS
+        ====================================================== -->
+
+        <section
+            id="departmentsSection"
+            class="section hidden"
+        >
+
+            <div class="heading">
+
+                <div>
+
+                    <h1>
+                        Departments
+                    </h1>
+
+                    <p>
+                        Overview of your organization's departments.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="departmentCards"
+                class="department-cards"
+            ></div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+
+<!-- =========================================================
+     EMPLOYEE MODAL
+========================================================== -->
+
+<div
+    class="modal"
+    id="employeeModal"
+>
+
+    <div class="modal-box">
+
+
+        <div class="modal-head">
+
+            <div>
+
+                <h2 id="modalTitle">
+                    Add Employee
+                </h2>
+
+                <p>
+                    Enter employee information below.
+                </p>
+
+            </div>
+
+
+            <button onclick="closeModal()">
+                ×
+            </button>
+
+        </div>
+
+
+
+        <form id="employeeForm">
+
+
+            <input
+                type="hidden"
+                id="employeeId"
+            >
+
+
+            <div class="form-grid">
+
+
+                <label>
+
+                    Full Name
+
+                    <input
+                        id="name"
+                        required
+                    >
+
+                </label>
+
+
+                <label>
+
+                    Email
+
+                    <input
+                        id="email"
+                        type="email"
+                        required
+                    >
+
+                </label>
+
+
+                <label>
+
+                    Phone
+
+                    <input
+                        id="phone"
+                    >
+
+                </label>
+
+
+                <label>
+
+                    Department
+
+                    <input
+                        id="department"
+                        required
+                    >
+
+                </label>
+
+
+                <label>
+
+                    Designation
+
+                    <input
+                        id="designation"
+                        required
+                    >
+
+                </label>
+
+
+                <label>
+
+                    Salary
+
+                    <input
+                        id="salary"
+                        type="number"
+                        step="0.01"
+                        required
+                    >
+
+                </label>
+
+
+                <label class="full">
+
+                    Joining Date
+
+                    <input
+                        id="joiningDate"
+                        type="date"
+                        required
+                    >
+
+                </label>
+
+            </div>
+
+
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    onclick="closeModal()"
+                >
+                    Cancel
+                </button>
+
+
+                <button
+                    class="add-btn"
+                    type="submit"
+                >
+                    Save Employee
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<!-- TOAST -->
+
+<div id="toast"></div>
+
+
+
+<!-- JAVASCRIPT -->
+
+<script src="script.js"></script>
+
+</body>
+</html>
